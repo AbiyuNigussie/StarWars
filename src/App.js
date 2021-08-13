@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import NavBar from  "./components/NavBar";
+import Planets from "./components/Planets";
+import People from "./components/People";
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
+const queryClient = new QueryClient();
 
 function App() {
+
+  const [page, setPage] = useState('people');
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <QueryClientProvider client = {queryClient}>
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            <h1>STAR WARS</h1>        
+          </header>
+          <NavBar setPage={setPage}></NavBar>
+          <Switch>
+            {page === 'planets' ? 
+                <Route path="/Planets" component={Planets}></Route>
+                : 
+                <Route path="/People" component={People}></Route>
+            }
+          </Switch>
+          <div>
+            
+          </div>
+        </div>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </Router>
+    </QueryClientProvider>
+    </>
   );
 }
 
