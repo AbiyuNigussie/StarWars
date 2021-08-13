@@ -1,11 +1,12 @@
 import React from 'react'; 
+import { Link } from 'react-router-dom';
 
 
-const Navbar = ({ setPage, changePage }) => {
+const Navbar = () => {
     return (
         <nav>
-            <button onClick = { () => setPage('planets') }>Planets</button>
-            <button onClick = { () => setPage('people') }>People</button>      
+            <Link to="/Planets"><button>PLANETS</button></Link>
+            <Link to="/People"><button>PEOPLE</button> </Link>
         </nav>
     );
 }
